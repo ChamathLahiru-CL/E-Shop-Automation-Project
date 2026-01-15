@@ -17,7 +17,7 @@ public class signUpPage {
 
     public signUpPage(WebDriver driver){
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(100));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
 //    Element Locators
@@ -26,6 +26,24 @@ public class signUpPage {
     private By userEmail = By.cssSelector("input[data-qa='signup-email']");
     private By signUpBt = By.cssSelector("button[data-qa='signup-button']");
     private By pw = By.id("password");
+    private By days =  By.id("days");
+    private By months = By.id("months");
+    private By years = By.id("years");
+    private By news = By.id("newsletter");
+    private By optionCK = By.id("optin");
+    private By fname = By.id("first_name");
+    private By lname = By.id("last_name");
+    private By companyName = By.id("company");
+    private By add1 = By.id("address1");
+    private By add2 = By.id("address2");
+    private By countryName = By.id("country");
+    private By state = By.id("state");
+    private By city = By.id("city");
+    private By zipcode = By.id("zipcode");
+    private By mNumber = By.id("mobile_number");
+    private By contunieBT = By.cssSelector("a[data-qa='continue-button']");
+
+
 
 //    Action
     public void openSignLogin(){
@@ -46,26 +64,30 @@ public class signUpPage {
                 radio.click();
             };
         driver.findElement(pw).sendKeys(password);
-        new Select(driver.findElement(By.id("days"))).selectByVisibleText(day);
-        new Select(driver.findElement(By.id("months"))).selectByVisibleText(month);
-        new Select(driver.findElement(By.id("years"))).selectByVisibleText(year);
-        driver.findElement(By.id("newsletter")).click();
-        driver.findElement(By.id("optin")).click();
-        driver.findElement(By.id("first_name")).sendKeys(fName);
-        driver.findElement(By.id("last_name")).sendKeys(lName);
-        driver.findElement(By.id("company")).sendKeys(cmp);
-        driver.findElement(By.id("address1")).sendKeys(address01);
-        driver.findElement(By.id("address2")).sendKeys(address02);
-        Select select = new Select(driver.findElement(By.id("country")));
+        new Select(driver.findElement(days)).selectByVisibleText(day);
+        new Select(driver.findElement(months)).selectByVisibleText(month);
+        new Select(driver.findElement(years)).selectByVisibleText(year);
+        driver.findElement(news).click();
+        driver.findElement(optionCK).click();
+        driver.findElement(fname).sendKeys(fName);
+        driver.findElement(lname).sendKeys(lName);
+        driver.findElement(companyName).sendKeys(cmp);
+        driver.findElement(add1).sendKeys(address01);
+        driver.findElement(add2).sendKeys(address02);
+        Select select = new Select(driver.findElement(countryName));
         select.selectByValue(userCountry);
-        driver.findElement(By.id("state")).sendKeys(userState);
-        driver.findElement(By.id("city")).sendKeys(userCity);
-        driver.findElement(By.id("zipcode")).sendKeys(userZipcode);
-        driver.findElement(By.id("mobile_number")).sendKeys(userMobile_number);
+        driver.findElement(state).sendKeys(userState);
+        driver.findElement(city).sendKeys(userCity);
+        driver.findElement(zipcode).sendKeys(userZipcode);
+        driver.findElement(mNumber).sendKeys(userMobile_number);
     }
 
     public void clickCreateAccount(){
-        driver.findElement(By.cssSelector("button[type='submit']"));
+        driver.findElement(By.cssSelector("button[type='submit']")).click();
+    }
+
+    public void afterCreatedContinueBT(){
+        driver.findElement(contunieBT).click();
     }
 
 
