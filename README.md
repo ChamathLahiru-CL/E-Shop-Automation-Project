@@ -119,27 +119,24 @@ Before running this project, ensure you have the following installed:
    mvn clean install
    ```
 
-3. **Configure WebDriver path** (if needed)
-   - Update the ChromeDriver path in `BaseTest.java`:
-   ```java
-   System.setProperty("webdriver.chrome.driver", "YOUR_CHROMEDRIVER_PATH");
-   ```
-   - Or remove this line to use WebDriverManager's automatic driver management
+3. **Configure WebDriver** (Optional)
+   - The project uses **WebDriverManager** for automatic driver management (recommended)
+   - Alternatively, you can manually specify ChromeDriver path in `BaseTest.java` if needed
 
 ## ⚙️ Configuration
 
-### Update ChromeDriver Path
+### Update ChromeDriver Configuration
 
 Edit `src/test/java/org/Methods/testCases/BaseTest.java`:
 
 ```java
 @BeforeTest
 public void beforeTest(){
-    // Option 1: Specify your ChromeDriver path
-    System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
+    // Option 1: Use WebDriverManager (recommended)
+    WebDriverManager.chromedriver().setup();
     
-    // Option 2: Use WebDriverManager (recommended)
-    // WebDriverManager.chromedriver().setup();
+    // Option 2: Specify your ChromeDriver path manually (alternative)
+    // System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
     
     driver = new ChromeDriver();
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
@@ -153,6 +150,8 @@ public void beforeTest(){
     cartPage = new cartPage(driver);
 }
 ```
+
+**Note**: WebDriverManager automatically downloads and manages the correct ChromeDriver version for your installed Chrome browser, eliminating manual driver management.
 
 ### Update Test Data
 
